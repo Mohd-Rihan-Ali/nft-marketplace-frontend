@@ -1,27 +1,48 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "../styles/SetPrice.module.scss";
 
+interface SetPriceProps {
+  toggle: boolean;
+  setToggle: (toggle: boolean) => void;
+  setListPrice: (price: number) => void;
+  listPrice: number;
+  confirmList: () => void;
+}
 
-const handleSetPrice = (setToggle:any, setListPrice:any) => {
+const SetPrice: React.FC<SetPriceProps> = ({
+  setToggle,
+  setListPrice,
+  listPrice,
+  confirmList,
+}) => {
+  //   const [price, setPrice] = useState<number>(0);
 
-    setToggle(false);
+  const handleSubmit = () => {
+    if (!listPrice) return alert("Please enter a price");
+    setListPrice(listPrice);
+    confirmList();
+  };
 
-};
-
-const SetPrice = (props:any) => {
-    const [price, setPrice] = useState<number>(0);
   return (
-    <div className={styles.setprice}>
-      <div className={styles.container}>
-        <h1 className={styles.setprice__title}>Set Price</h1>
-        <div className={styles.price}>
-          <input
-            type="text"
-            placeholder="Enter Price"
-            className={styles.setprice__input}
-            onChange={(e) => setPrice(parseInt(e.target.value))}
-          />
-          <button onClick={() => handleSetPrice(props.setToggle, props.setListPrice)} >Set Price</button>
+    <div className={styles.popup}>
+      <div className={styles.popupInner}>
+        <h2>Set Listing Price</h2>
+        <input
+          type="number"
+          value={listPrice}
+          onChange={(e) => setListPrice(Number(e.target.value))}
+          placeholder="Enter price"
+        />
+        <div className={styles.buttons}>
+          <button onClick={handleSubmit} className={styles.buttonGo}>
+            Go
+          </button>
+          <button
+            onClick={() => setToggle(false)}
+            className={styles.buttonCancel}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ import styles from "../styles/NFTDetails.module.scss";
 import Transfer from "../components/Transfer";
 import { useMinter } from "../utils/contexts/MinterContext";
 import { useMarketplace } from "../utils/contexts/MarketplaceContext";
-import { isSet } from "util/types";
 import SetPrice from "../components/SetPrice";
 
 interface NFT {
@@ -81,9 +80,14 @@ const NFTDetails = () => {
   if (error) return <div>Error loading NFT details</div>;
 
   const handleList = async () => {
-    // setToggle(true);
+    setToggle(true);
+  };
+
+  const confirmList = async () => {
+    setToggle(false);
     const response = await listNftMutation.mutateAsync();
-    listNft(Number(nft?.tokenId), 60000000);
+    if (!listPrice) return alert("Please enter a price");
+    listNft(Number(nft?.tokenId), Number(listPrice));
     console.log(response);
   };
 
@@ -103,13 +107,19 @@ const NFTDetails = () => {
 
   let currentOwner = nft?.history[nft.history.length - 1];
   let isListed = nft?.isListed;
+
   return (
     <>
-      {/* {toggle ? (
-        <SetPrice toggle={toggle} setToggle={setToggle} setListPrice={setListPrice} />
-      ) : ( */}
+      {toggle && (
+        <SetPrice
+          toggle={toggle}
+          setToggle={setToggle}
+          listPrice={listPrice}
+          setListPrice={setListPrice}
+          confirmList={confirmList}
+        />
+      )}
       <div className={styles.container}>
-        {/* <Transfer tokenId={nft?.tokenId} /> */}
         <div className={styles.nftDetail}>
           <img src={nft?.image} alt={nft?.name} />
           <div className={styles.nftInfo}>
@@ -148,7 +158,6 @@ const NFTDetails = () => {
           </div>
         </div>
       </div>
-      {/* )} */}
     </>
   );
 };
