@@ -1,0 +1,47 @@
+$primary-color: #5a67d8;
+$bg-color: #f7fafc;
+$font-color: #2d3748;
+$border-radius: 8px;
+$transition: 0.3s ease-in-out;
+
+.setprice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color;
+
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        background-color: $bg-color;
+
+        .setprice__title{
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .setprice__input{
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .setprice__button{
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    }
+}
