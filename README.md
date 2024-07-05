@@ -1,46 +1,97 @@
-# Getting Started with Create React App
+# NFT Marketplace Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the NFT Marketplace Frontend repository! This project is designed to provide a user-friendly interface for interacting with an NFT marketplace. Users can explore, buy, and sell NFTs seamlessly.
 
-## Available Scripts
+## Project URL
 
-In the project directory, you can run:
+You can find the repository at: [https://github.com/Mohd-Rihan-Ali/nft-marketplace-frontend.git](https://github.com/Mohd-Rihan-Ali/nft-marketplace-frontend.git)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This frontend application is built with React and TypeScript, utilizing several key dependencies to provide a robust and efficient user experience. The application includes features such as wallet integration, NFT browsing, and transaction handling.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To get started with this project, follow the instructions below.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Make sure you have the following installed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (>= 14.x)
+- npm (>= 6.x) or yarn (>= 1.x)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the repository and install the dependencies:
 
-### `npm run eject`
+```bash
+git clone https://github.com/Mohd-Rihan-Ali/nft-marketplace-frontend.git
+cd nft-marketplace-frontend
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Running the Application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To start the application in development mode, use:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This will start the app on `http://localhost:3000`.
 
-## Learn More
+### Building the Application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To build the application for production, use:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
+
+This will create an optimized build of the application in the `build` directory.
+
+### Running Tests
+
+To run tests, use:
+
+```bash
+npm test
+```
+
+## Key Dependencies
+
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A strict syntactical superset of JavaScript that adds optional static typing.
+- **React Router DOM**: Declarative routing for React applications.
+- **Ethers**: A library for interacting with the Ethereum blockchain.
+- **Axios**: A promise-based HTTP client for making API requests.
+- **Sass**: A preprocessor scripting language that is interpreted or compiled into CSS.
+
+For a complete list of dependencies, refer to the `package.json` file.
+
+## Scripts
+
+The following scripts are available in the project:
+
+- `npm start`: Starts the development server.
+- `npm run build`: Builds the app for production.
+- `npm test`: Runs the test suite.
+- `npm run eject`: Ejects the app from Create React App configuration.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+Contributions are highly appriciated!
