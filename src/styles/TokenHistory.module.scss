@@ -5,14 +5,18 @@ $border-radius: 8px;
 $transition: 0.3s ease-in-out;
 
 .tokenHistory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   padding: 20px;
   border-radius: $border-radius;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  // width: 100%;
-  // max-width: 1200px;
-  // margin: 0 auto;
+  max-width: 1200px;
+  margin: 2rem;
+  
 
   h2 {
     color: $primary-color;
@@ -21,7 +25,8 @@ $transition: 0.3s ease-in-out;
   }
 
   .historyTable { 
-    // width: 100%;
+    width: 100%;
+    max-width: 1200px;
     border-collapse: collapse;
 
     th,

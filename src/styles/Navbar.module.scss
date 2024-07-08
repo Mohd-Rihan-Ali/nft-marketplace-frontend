@@ -6,16 +6,14 @@ $border-radius: 8px;
 $transition: 0.3s ease-in-out;
 
 .navbar {
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
-  height: 5rem;
   background-color: $bg-color;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 3rem;
-  padding: 0 1rem;
+  padding: 1rem 0;
+  // margin-bottom: 2rem;
+  overflow: hidden;
 
   .container {
     display: flex;
@@ -31,6 +29,11 @@ $transition: 0.3s ease-in-out;
     }
 
     .left {
+      .logoLink {
+        text-decoration: none;
+        color: inherit;
+      }
+
       .logo {
         font-size: 1.5rem;
         background-color: $primary-color;
@@ -46,67 +49,112 @@ $transition: 0.3s ease-in-out;
 
       .menu {
         display: flex;
-        .menu_item {
+
+        .menuItem {
           margin-right: 1rem;
           font-size: 1rem;
           cursor: pointer;
           background-color: $bg-color;
+          text-decoration: none;
+          color: $font-color;
+          padding: 0.5rem;
+          border-radius: $border-radius;
           &:hover {
             color: $primary-color;
+            background-color: lighten($primary-color, 40%);
           }
         }
       }
     }
 
     .right {
-      .right_container {
+      display: flex;
+      align-items: center;
+
+      .search {
         display: flex;
         align-items: center;
+        background-color: $secondary-color;
+        border: 1px solid rgba(159, 159, 159, 0.5);
+        border-radius: $border-radius;
+        padding: 0.5rem;
+        margin-right: 1rem;
 
-        .search {
-          display: flex;
-          align-items: center;
-          background-color: $bg-color;
-          border: 1px solid rgba(159, 159, 159, 0.5);
-          border-radius: $border-radius;
-          padding: 0.5rem;
-          margin-right: 1rem;
+        .searchIcon {
+          margin-right: 0.5rem;
+        }
 
-          .search_container {
-            display: flex;
-            align-items: center;
-
-            .search_icon {
-              margin-right: 0.5rem;
-            }
-
-            .search_input {
-              border: none;
-              background: none;
-              color: rgba(159, 159, 159, 1);
-              font-size: 1rem;
-              &:focus {
-                outline: none;
-              }
-            }
+        .searchInput {
+          border: none;
+          background: none;
+          color: rgba(159, 159, 159, 1);
+          font-size: 1rem;
+          &:focus {
+            outline: none;
           }
         }
+      }
 
-        .connect_wallet {
-          background-color: $primary-color;
-          color: $secondary-color;
-          padding: 0.5rem 1rem;
-          border-radius: $border-radius;
-          cursor: pointer;
-          margin-right: 1rem;
-          &:hover {
-            background-color: darken($primary-color, 5%);
-          }
+      .connectWallet {
+        background-color: $primary-color;
+        color: $secondary-color;
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius;
+        cursor: pointer;
+        margin-right: 1rem;
+        &:hover {
+          background-color: darken($primary-color, 5%);
         }
+      }
 
-        .bag_icon {
-          cursor: pointer;
+      .bagIcon {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .left {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .logo {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .menu {
+        flex-direction: column;
+
+        .menuItem {
+          margin-right: 0;
+          margin-bottom: 0.5rem;
         }
+      }
+    }
+
+    .right {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .search {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+
+      .connectWallet {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
       }
     }
   }

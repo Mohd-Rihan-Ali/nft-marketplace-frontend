@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "../styles/Profile.module.scss";
+import ConnectWallet from "../components/ConnectWallet";
 
 interface NFT {
   name: string;
@@ -33,7 +34,7 @@ const Profile = () => {
 
   return (
     <div className={styles.profile}>
-      <h2>Your Profile</h2>
+      <h2>{account ? "Your Profile" : "Connect Wallet 💭"}</h2>
 
       <div className={styles.nftGallery}>
         {ownedNFTs?.map((nft) => (

@@ -11,6 +11,7 @@ const Navbar = () => {
   const { connectWallet: marketplaceWallet } = useMarketplace();
   const [isConnected, setIsConnected] = useState(false);
 
+  
   const handleConnectWallet = () => {
     connectWallet();
     marketplaceWallet();
@@ -18,57 +19,42 @@ const Navbar = () => {
     setIsConnected(true);
   };
 
+  const abbreviateAddress = (address: string) => {
+    return address ? `${address.slice(0, 3)}...${address.slice(-5)}` : "";
+  };
+
   return (
-    <>
-      <div className={styles.navbar}>
-        <div className={styles.container}>
-          <div className={styles.left}>
-            <Link to={"/"} style={{ textDecoration: "none", color: "inherit" }}>
-              <div className={styles.logo}>Minter</div>
+    <div className={styles.navbar}>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <Link to="/" className={styles.logoLink}>
+            <div className={styles.logo}>Minter</div>
+          </Link>
+          <div className={styles.menu}>
+            <Link to="/mint" className={styles.menuItem}>
+              Mint
             </Link>
-            <div className={styles.menu}>
-              <Link
-                to={"/mint"}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <div className={styles.menu_item}>Mint</div>
-              </Link>
-              <Link
-                to={"/profile"}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <div className={styles.menu_item}>Profile</div>
-              </Link>
-            </div>
-          </div>
-          <div className={styles.right}>
-            <div className={styles.right_container}>
-              <div className={styles.search}>
-                <div className={styles.search_container}>
-                  <div className={styles.search_icon}>
-                    <IoIosSearch size={20} />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className={styles.search_input}
-                  />
-                </div>
-              </div>
-              <div
-                className={styles.connect_wallet}
-                onClick={handleConnectWallet}
-              >
-                {isConnected ? account : "Connect Wallet"}
-              </div>
-              <div className={styles.bag_icon}>
-                <PiHandbagSimpleLight size={25} />
-              </div>
-            </div>
+            <Link to="/profile" className={styles.menuItem}>
+              {account ? "Profile" : "Profile"}
+            </Link>
           </div>
         </div>
+        <div className={styles.right}>
+          <div className={styles.search}>
+            <IoIosSearch size={20} className={styles.searchIcon} />
+            <input
+              type="text"
+              placeholder="Search"
+              className={styles.searchInput}
+            />
+          </div>
+          <div className={styles.connectWallet} onClick={handleConnectWallet}>
+            {isConnected ? abbreviateAddress(account as string) : "Connect Wallet"}
+          </div>
+          <PiHandbagSimpleLight size={25} className={styles.bagIcon} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

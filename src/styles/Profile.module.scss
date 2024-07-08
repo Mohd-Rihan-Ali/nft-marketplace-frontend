@@ -10,6 +10,8 @@ $transition: 0.3s ease-in-out;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 1200px;
 
   .nftGallery {
     display: flex;
@@ -18,6 +20,8 @@ $transition: 0.3s ease-in-out;
     justify-content: center;
     flex-direction: row;
     gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
 
     .nftItem {
       background-color: white;
@@ -25,6 +29,7 @@ $transition: 0.3s ease-in-out;
       border-radius: $border-radius;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       width: 180px;
+      height: 180px;
       text-align: center;
       transition: transform $transition;
 

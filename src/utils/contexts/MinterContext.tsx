@@ -92,6 +92,10 @@ export const MinterProvider: React.FC<{ children: ReactNode }> = ({
   const mintToken = async (accountAddress: string, uri: string) => {
     if (contract && owner) {
       try {
+        if(accountAddress !== owner) {
+          alert("Only the owner can mint tokens");
+          return;
+        }
         const tx = await contract.mint(accountAddress, uri);
         const data = await tx.wait();
         console.log("Token minted:", data);

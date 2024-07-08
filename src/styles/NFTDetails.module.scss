@@ -9,7 +9,7 @@ body {
   color: $font-color;
   font-family: "Helvetica Neue", Arial, sans-serif;
   width: 100%;
-  max-width: 1500px;
+  // max-width: 1500px;
 }
 
 .container {
@@ -89,4 +89,12 @@ body {
       color: white;
     }
   }
+}
+.tokenHistory{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
 }

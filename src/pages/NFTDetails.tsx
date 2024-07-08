@@ -161,12 +161,12 @@ const NFTDetails = () => {
                 : "List"
               : isListed
               ? "Buy"
-              : ""}
+              : "Not Listed Yet"}
           </div>
         </div>
       </div>
 
-      <div>
+      <div className={styles.tokenHistory}>
         <TokenHistory history={combinedResponse?.tokenHistory} />
       </div>
     </>

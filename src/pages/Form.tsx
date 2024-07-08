@@ -27,13 +27,11 @@ const MintPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
-  // const [to, setTo] = useState("");
-  // const [fTokenId, setFTokenId] = useState<number>();
 
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts", account],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:8800/nfts/${account}`);
+      const response = await axios.get(`http://localhost:8801/nfts/${account}`);
       return response.data;
     },
     enabled: !!account,
@@ -53,7 +51,7 @@ const MintPage = () => {
         formData.append("account", account || "");
         formData.append("owner", owner || "");
       }
-      return await fetch("http://localhost:8800/mint", {
+      return await fetch("http://localhost:8801/mint", {
         method: "POST",
         body: formData,
       }).then((res) => res.json());
@@ -111,11 +109,7 @@ const MintPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {/* <button onClick={connectWallet}>Connect Wallet</button>
-        <p>Owner: {owner}</p>
-        <p>Account: {account}</p> */}
-
-        <h2>Create NFT</h2>
+        <h2>Mint NFT</h2>
       </div>
 
       <div className={styles.form}>
