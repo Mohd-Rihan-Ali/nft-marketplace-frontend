@@ -39,18 +39,6 @@ const Navbar = () => {
               >
                 <div className={styles.menu_item}>Profile</div>
               </Link>
-              <Link
-                to={"/seller"}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <div className={styles.menu_item}>Seller</div>
-              </Link>
-              <Link
-                to={"/buy"}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <div className={styles.menu_item}>Buy</div>
-              </Link>
             </div>
           </div>
           <div className={styles.right}>

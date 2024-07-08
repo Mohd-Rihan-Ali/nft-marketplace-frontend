@@ -20,7 +20,7 @@ export const HomePage = () => {
   const { account } = useMinter();
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
 
-  const { data: nfts } = useQuery<NFT[]>({
+  const { data: nfts } = useQuery({
     queryKey: ["nfts"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:8801/nfts");

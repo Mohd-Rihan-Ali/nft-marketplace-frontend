@@ -7,6 +7,7 @@ import Transfer from "../components/Transfer";
 import { useMinter } from "../utils/contexts/MinterContext";
 import { useMarketplace } from "../utils/contexts/MarketplaceContext";
 import SetPrice from "../components/SetPrice";
+import TokenHistory from "../components/TokenHistory";
 
 interface NFT {
   name: string;
@@ -26,10 +27,10 @@ const NFTDetails = () => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const {
-    data: nft,
+    data: combinedResponse,
     isLoading,
     error,
-  } = useQuery<NFT>({
+  } = useQuery({
     queryKey: ["nftDetails"],
     queryFn: async () => {
       const response = await axios.get(
@@ -87,26 +88,29 @@ const NFTDetails = () => {
     setToggle(false);
     const response = await listNftMutation.mutateAsync();
     if (!listPrice) return alert("Please enter a price");
-    listNft(Number(nft?.tokenId), Number(listPrice));
+    listNft(Number(combinedResponse?.nft.tokenId), Number(listPrice));
     console.log(response);
   };
 
   const handleCancelListing = async () => {
     const response = await cancelListMutation.mutateAsync();
-    cancelListing(Number(nft?.tokenId));
+    cancelListing(Number(combinedResponse?.nft.tokenId));
     console.log(response);
   };
 
   const handleBuy = async () => {
     const response = await buyNftMutation.mutateAsync();
-    buyNft(Number(nft?.tokenId));
+    buyNft(Number(combinedResponse?.nft.tokenId));
     console.log(response);
   };
 
-  const date = nft?.createdAt ? new Date(nft.createdAt).toLocaleString() : "";
+  const date = combinedResponse?.nft.createdAt
+    ? new Date(combinedResponse?.nft.createdAt).toLocaleString()
+    : "";
 
-  let currentOwner = nft?.history[nft.history.length - 1];
-  let isListed = nft?.isListed;
+  let currentOwner =
+    combinedResponse?.nft.history[combinedResponse?.nft.history.length - 1];
+  let isListed = combinedResponse?.nft.isListed;
 
   return (
     <>
@@ -121,20 +125,23 @@ const NFTDetails = () => {
       )}
       <div className={styles.container}>
         <div className={styles.nftDetail}>
-          <img src={nft?.image} alt={nft?.name} />
+          <img
+            src={combinedResponse?.nft.image}
+            alt={combinedResponse?.nft.name}
+          />
           <div className={styles.nftInfo}>
-            <h1>{nft?.name}</h1>
-            <p>{nft?.description}</p>
-            <p>Token ID: {nft?.tokenId}</p>
+            <h1>{combinedResponse?.nft.name}</h1>
+            <p>{combinedResponse?.nft.description}</p>
+            <p>Token ID: {combinedResponse?.nft.tokenId}</p>
             <p>Created At: {date}</p>
-            <div className={styles.history}>
+            {/* <div className={styles.history}>
               <p>History:</p>
-              {nft?.history.map((h: string, id: number) => (
+              {combinedResponse?.nft.history.map((h: string, id: number) => (
                 <div key={id} className={styles.ids}>
                   {id}: {h}
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
           <div
             className={styles.options}
@@ -157,6 +164,10 @@ const NFTDetails = () => {
               : ""}
           </div>
         </div>
+      </div>
+
+      <div>
+        <TokenHistory history={combinedResponse?.tokenHistory} />
       </div>
     </>
   );

@@ -47,14 +47,6 @@ const router = createBrowserRouter([
         path: "/nft/:tokenId",
         element: <NFTDetails />,
       },
-      {
-        path: "/seller",
-        element: <Seller />,
-      },
-      {
-        path: "/buy",
-        element: <Buy />,
-      },
     ],
   },
 ]);
