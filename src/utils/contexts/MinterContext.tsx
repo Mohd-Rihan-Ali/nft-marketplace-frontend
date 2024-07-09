@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 import { MINTER_ABI } from "../ABIs/NFTMinterABI";
 
 // const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS as string;
-const CONTRACT_ADDRESS = "0xe13ef997f8033A591CbAa5198c9c415478e439F1";
+const CONTRACT_ADDRESS = "0x4fD96a6450047Ed0370b90b1BB1dDfCba5C93E3F";
 console.log("Contract address:", CONTRACT_ADDRESS);
 
 const contractABI = MINTER_ABI;
@@ -92,10 +92,6 @@ export const MinterProvider: React.FC<{ children: ReactNode }> = ({
   const mintToken = async (accountAddress: string, uri: string) => {
     if (contract && owner) {
       try {
-        if(accountAddress !== owner) {
-          alert("Only the owner can mint tokens");
-          return;
-        }
         const tx = await contract.mint(accountAddress, uri);
         const data = await tx.wait();
         console.log("Token minted:", data);

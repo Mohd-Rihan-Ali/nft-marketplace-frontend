@@ -9,8 +9,8 @@ import { ethers } from "ethers";
 import { MARKETPLACE_ABI } from "../ABIs/MarketplaceABI";
 import { MINTER_ABI } from "../ABIs/NFTMinterABI";
 
-const NFT_MINTER_CONTRACT = "0xe13ef997f8033A591CbAa5198c9c415478e439F1"; // nft minter contract address
-const CONTRACT_ADDRESS = "0x57d0E5F275cB10D863862550287dA2a200524Bc5"; // nft marketplace contract address
+const NFT_MINTER_CONTRACT = "0x4fD96a6450047Ed0370b90b1BB1dDfCba5C93E3F"; // nft minter contract address
+const CONTRACT_ADDRESS = "0x7De417b206e87c21450Ee1D0Ba3c3EC58F320725"; // nft marketplace contract address
 console.log("NFT Minter Contract address:", NFT_MINTER_CONTRACT);
 console.log("Marketplace Contract address:", CONTRACT_ADDRESS);
 
@@ -79,7 +79,7 @@ export const MarketplaceProvider: React.FC<{ children: ReactNode }> = ({
           signer
         );
         setMinterContract(nftMinter);
-        
+
         const marketplace_contract = new ethers.Contract(
           CONTRACT_ADDRESS,
           marketplaceABI,
