@@ -122,9 +122,11 @@ export const MarketplaceProvider: React.FC<{ children: ReactNode }> = ({
         console.log("Approve transaction:", approveTx);
         await approveTx.wait();
 
+        const priceInWei = ethers.utils.parseEther(price.toString());
+
         // List the NFT
         console.log("Listing the NFT on the marketplace...");
-        const tx = await contract.listNFT(tokenId, price, {
+        const tx = await contract.listNFT(tokenId, priceInWei, {
           gasLimit: 100000,
         });
         console.log("List transaction:", tx);
@@ -195,7 +197,8 @@ export const MarketplaceProvider: React.FC<{ children: ReactNode }> = ({
   const updatePrice = async (tokenId: number, newPrice: number) => {
     try {
       if (contract) {
-        const tx = await contract.updatePrice(tokenId, newPrice);
+        const priceInWei = ethers.utils.parseEther(newPrice.toString());
+        const tx = await contract.updatePrice(tokenId, priceInWei);
         await tx.wait();
       } else {
         throw new Error("Contract not found");

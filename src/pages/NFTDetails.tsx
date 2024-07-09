@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import styles from "../styles/NFTDetails.module.scss";
-import Transfer from "../components/Transfer";
-import { useMinter } from "../utils/contexts/MinterContext";
-import { useMarketplace } from "../utils/contexts/MarketplaceContext";
 import SetPrice from "../components/SetPrice";
 import TokenHistory from "../components/TokenHistory";
+import { useMinter } from "../utils/contexts/MinterContext";
+import { useMarketplace } from "../utils/contexts/MarketplaceContext";
 
 interface NFT {
   name: string;
@@ -25,6 +24,7 @@ const NFTDetails = () => {
   const { account } = useMinter();
   const [listPrice, setListPrice] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const {
     data: combinedResponse,
@@ -81,6 +81,7 @@ const NFTDetails = () => {
   if (error) return <div>Error loading NFT details</div>;
 
   const handleList = async () => {
+    setIsDisabled(true);
     setToggle(true);
   };
 
@@ -88,19 +89,25 @@ const NFTDetails = () => {
     setToggle(false);
     const response = await listNftMutation.mutateAsync();
     if (!listPrice) return alert("Please enter a price");
-    listNft(Number(combinedResponse?.nft.tokenId), Number(listPrice));
+
+    await listNft(Number(combinedResponse?.nft.tokenId), listPrice);
+    setIsDisabled(false);
     console.log(response);
   };
 
   const handleCancelListing = async () => {
+    setIsDisabled(true);
     const response = await cancelListMutation.mutateAsync();
-    cancelListing(Number(combinedResponse?.nft.tokenId));
+    await cancelListing(Number(combinedResponse?.nft.tokenId));
+    setIsDisabled(false);
     console.log(response);
   };
 
   const handleBuy = async () => {
+    setIsDisabled(true);
     const response = await buyNftMutation.mutateAsync();
-    buyNft(Number(combinedResponse?.nft.tokenId));
+    await buyNft(Number(combinedResponse?.nft.tokenId));
+    setIsDisabled(false);
     console.log(response);
   };
 
@@ -121,6 +128,8 @@ const NFTDetails = () => {
           listPrice={listPrice}
           setListPrice={setListPrice}
           confirmList={confirmList}
+          setIsDisabled={setIsDisabled}
+          isDisabled={isDisabled}
         />
       )}
       <div className={styles.container}>
@@ -134,34 +143,31 @@ const NFTDetails = () => {
             <p>{combinedResponse?.nft.description}</p>
             <p>Token ID: {combinedResponse?.nft.tokenId}</p>
             <p>Created At: {date}</p>
-            {/* <div className={styles.history}>
-              <p>History:</p>
-              {combinedResponse?.nft.history.map((h: string, id: number) => (
-                <div key={id} className={styles.ids}>
-                  {id}: {h}
-                </div>
-              ))}
-            </div> */}
           </div>
+
           <div
-            className={styles.options}
+            className={`${styles.options} ${isDisabled ? styles.disabled : ""}`}
             onClick={
-              currentOwner === account
-                ? isListed
-                  ? handleCancelListing
-                  : handleList
-                : isListed
-                ? handleBuy
+              !isDisabled
+                ? currentOwner === account
+                  ? isListed
+                    ? handleCancelListing
+                    : handleList
+                  : isListed
+                  ? handleBuy
+                  : undefined
                 : undefined
             }
           >
-            {currentOwner === account
-              ? isListed
-                ? "Cancel Listing"
-                : "List"
-              : isListed
-              ? "Buy"
-              : "Not Listed Yet"}
+            {!isDisabled
+              ? currentOwner === account
+                ? isListed
+                  ? "Cancel Listing"
+                  : "List"
+                : isListed
+                ? "Buy"
+                : "Not Listed Yet"
+              : "Loading..."}
           </div>
         </div>
       </div>

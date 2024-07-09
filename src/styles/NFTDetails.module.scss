@@ -9,7 +9,6 @@ body {
   color: $font-color;
   font-family: "Helvetica Neue", Arial, sans-serif;
   width: 100%;
-  // max-width: 1500px;
 }
 
 .container {
@@ -50,22 +49,6 @@ body {
       color: $font-color;
       margin: 5px 0;
     }
-
-    .history {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-
-      .ids {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-    }
   }
 
   .options {
@@ -73,24 +56,34 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     width: 100%;
     gap: 1rem;
-    padding: 20px;
+    border: none;
     border-bottom-right-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
     margin-top: 0.5rem;
     cursor: pointer;
     color: white;
-  }
+    transition: background-color $transition;
 
-  &:hover {
-    .options {
+    &.disabled {
+      background-color: lighten($primary-color, 20%);
+      cursor: not-allowed;
+    }
+
+    &:hover:not(.disabled) {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+  &:hover{
+    .options{
       background-color: $primary-color;
-      color: white;
     }
   }
 }
-.tokenHistory{
+
+.tokenHistory {
   display: flex;
   flex-direction: column;
   justify-content: center;

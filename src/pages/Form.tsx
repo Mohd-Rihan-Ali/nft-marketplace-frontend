@@ -27,6 +27,7 @@ const MintPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
+  const [isMinting, setIsMinting] = useState(false);
 
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts", account],
@@ -56,29 +57,10 @@ const MintPage = () => {
         body: formData,
       }).then((res) => res.json());
     },
+    onError: () => {
+      setIsMinting(false);
+    },
   });
-
-  // const transferMutation = useMutation({
-  //   mutationFn: async () => {
-  //     const formData = new FormData();
-  //     if (owner && to && fTokenId) {
-  //       formData.append("owner", owner || "");
-  //       formData.append("to", to || "");
-  //       formData.append("fTokenId", fTokenId?.toString() || "");
-  //     }
-  //     return await fetch("http://localhost:8800/transfer", {
-  //       method: "POST",
-  //       body: formData,
-  //     }).then((res) => res.json());
-  //   },
-  // });
-
-  if (mutation.isPending) return <>Loading...</>;
-  if (mutation.isError) return <>Error: {mutation.error.message}</>;
-
-  // if (transferMutation.isPending) return <>Loading...</>;
-  // if (transferMutation.isError)
-  //   return <>Error: {transferMutation.error.message}</>;
 
   const handleImageChange = async (e: any) => {
     e.preventDefault();
@@ -89,23 +71,19 @@ const MintPage = () => {
 
   const handleMintToken = async () => {
     if (account && name && description && image) {
+      setIsMinting(true);
       const imageUri = await mutation.mutateAsync();
       console.log("Image URI:", imageUri.response);
       await mintToken(account, imageUri.response);
-      setImage(null);
+    } else {
+      alert("Please fill in all fields");
     }
+    setIsMinting(false);
+    setImage(null);
+    setName("");
+    setDescription("");
   };
 
-  // const handleTransfer = async () => {
-  //   if (!to || !fTokenId) {
-  //     console.error("Recipient or Token ID is not defined");
-  //     return;
-  //   }
-  //   const response = await transferMutation.mutateAsync();
-  //   await transfer(to, fTokenId);
-
-  //   console.log(response.data);
-  // };
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -119,6 +97,7 @@ const MintPage = () => {
             name="name"
             id="name"
             placeholder="Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
@@ -126,6 +105,7 @@ const MintPage = () => {
             name="description"
             id="description"
             placeholder="Description"
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <input
@@ -146,44 +126,20 @@ const MintPage = () => {
               Upload Image
             </button>
           )}
-        </form>
-        <button onClick={handleMintToken}>Mint</button>
-      </div>
-
-      {/* <div className="transfer">
-        <h2>Transfer NFT</h2>
-        <input
-          type="text"
-          name="to"
-          id="to"
-          placeholder="To Address"
-          onChange={(e) => setTo(e.target.value)}
-        />
-        <input
-          type="text"
-          name="tokenId"
-          id="tokenId"
-          placeholder="Token ID"
-          onChange={(e) => setFTokenId(Number(e.target.value))}
-        />
-        <button onClick={handleTransfer}>Transfer</button>
-      </div> */}
-
-      {/* <div className={styles.nftGallery}>
-        {ownedNFTs?.map((nft) => (
-          <Link
-            to={`/nft/${nft.tokenId}`}
-            key={nft.tokenId}
-            className={styles.nftLink}
-          >
-            <div className={styles.nftItem}>
-              <img src={nft.image} alt={nft.name} />
-              <div className={styles.nftName}>{nft.name}</div>
-              <div className={styles.nftDescription}>{nft.description}</div>
+          {image && (
+            <div className={styles.uploadedImg}>
+              <img src={URL.createObjectURL(image)} alt="Uploaded Image" />
+              <p>{image.name}</p>
             </div>
-          </Link>
-        ))}
-      </div> */}
+          )}
+        </form>
+        <button
+          onClick={account ? handleMintToken : connectWallet}
+          disabled={isMinting ? true : false}
+        >
+          {isMinting ? "Minting..." : account ? "Mint" : "Connect Wallet 💭"}
+        </button>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const abbreviateAddress = (address: string) => {
 };
 
 const formatPrice = (price: number) => {
-  const formattedPrice = Number(price) / 10 ** 9;
+  const formattedPrice = Number(price) / 10 ** 18;
   return formattedPrice;
 };
 
@@ -39,7 +39,7 @@ const  TokenHistory: React.FC<TokenHistoryProps> = ({ history }) => {
             {history.events.map((event, index) => (
               <tr key={index}>
                 <td>{event}</td>
-                <td>{formatPrice(Number(history.prices[index]))} GWEI</td>
+                <td>{formatPrice(Number(history.prices[index]))} ETH</td>
                 <td>{abbreviateAddress(history.from[index])}</td>
                 <td>{abbreviateAddress(history.to[index])}</td>
                 <td>{new Date(history.date[index]).toLocaleString()}</td>

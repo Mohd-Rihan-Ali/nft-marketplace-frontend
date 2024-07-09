@@ -7,6 +7,8 @@ interface SetPriceProps {
   setListPrice: (price: number) => void;
   listPrice: number;
   confirmList: () => void;
+  setIsDisabled: (disabled: boolean) => void;
+  isDisabled: boolean;
 }
 
 const SetPrice: React.FC<SetPriceProps> = ({
@@ -14,13 +16,19 @@ const SetPrice: React.FC<SetPriceProps> = ({
   setListPrice,
   listPrice,
   confirmList,
+  setIsDisabled,
+  isDisabled,
 }) => {
-  //   const [price, setPrice] = useState<number>(0);
-
   const handleSubmit = () => {
     if (!listPrice) return alert("Please enter a price");
+
     setListPrice(listPrice);
     confirmList();
+  };
+
+  const handleCancel = () => {
+    setToggle(false);
+    setIsDisabled(false);
   };
 
   return (
@@ -29,18 +37,15 @@ const SetPrice: React.FC<SetPriceProps> = ({
         <h2>Set Listing Price</h2>
         <input
           type="number"
-          value={listPrice}
-          onChange={(e) => setListPrice(Number(e.target.value))}
+          value={listPrice.toString()}
+          onChange={(e) => setListPrice(e.target.value as any as number)}
           placeholder="Enter price"
         />
         <div className={styles.buttons}>
           <button onClick={handleSubmit} className={styles.buttonGo}>
             Go
           </button>
-          <button
-            onClick={() => setToggle(false)}
-            className={styles.buttonCancel}
-          >
+          <button onClick={handleCancel} className={styles.buttonCancel}>
             Cancel
           </button>
         </div>
