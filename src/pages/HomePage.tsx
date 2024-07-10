@@ -21,7 +21,9 @@ export const HomePage = () => {
   const { data: nfts } = useQuery({
     queryKey: ["nfts"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:8801/nfts");
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL as string}/nfts`
+      );
       return response.data;
     },
   });

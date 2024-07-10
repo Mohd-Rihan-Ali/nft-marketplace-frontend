@@ -22,7 +22,9 @@ const Profile = () => {
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts", account],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:8801/nfts/${account}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL as string}/nfts/${account}`
+      );
       return response.data;
     },
     enabled: !!account,

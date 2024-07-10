@@ -9,10 +9,12 @@ import { ethers } from "ethers";
 import { MARKETPLACE_ABI } from "../ABIs/MarketplaceABI";
 import { MINTER_ABI } from "../ABIs/NFTMinterABI";
 
-const NFT_MINTER_CONTRACT = "0x4fD96a6450047Ed0370b90b1BB1dDfCba5C93E3F"; // nft minter contract address
-const CONTRACT_ADDRESS = "0x7De417b206e87c21450Ee1D0Ba3c3EC58F320725"; // nft marketplace contract address
-console.log("NFT Minter Contract address:", NFT_MINTER_CONTRACT);
-console.log("Marketplace Contract address:", CONTRACT_ADDRESS);
+
+const NFT_MINTER_CONTRACT = process.env.REACT_APP_MINTER_CONTRACT_ADDRESS as string; // nft minter contract address
+const CONTRACT_ADDRESS = process.env.REACT_APP_MARKETPLACE_CONTRACT_ADDRESS as string; // nft marketplace contract address
+
+console.log("REACT_APP_MINTER_CONTRACT_ADDRESS:", NFT_MINTER_CONTRACT);
+console.log("REACT_APP_MARKETPLACE_CONTRACT_ADDRESS:", CONTRACT_ADDRESS);
 
 const marketplaceABI = MARKETPLACE_ABI;
 const nftMinterABI = MINTER_ABI;

@@ -19,7 +19,7 @@ const Transfer = (prop: any) => {
         formData.append("to", to || "");
         formData.append("fTokenId", prop.tokenId?.toString() || "");
       }
-      return await fetch("http://localhost:8800/transfer", {
+      return await fetch(`${process.env.REACT_APP_URL as string}/transfer`, {
         method: "POST",
         body: formData,
       }).then((res) => res.json());

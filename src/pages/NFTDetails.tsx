@@ -30,11 +30,12 @@ const NFTDetails = () => {
     data: combinedResponse,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["nftDetails"],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:8801/nfts/nft/${tokenId}`
+        `${process.env.REACT_APP_URL as string}/nfts/nft/${tokenId}`
       );
       return response.data;
     },
@@ -46,7 +47,7 @@ const NFTDetails = () => {
       const formData = new FormData();
       formData.append("isListed", "true");
       formData.append("tokenId", tokenId as string);
-      return await fetch("http://localhost:8801/marketplace/list-nft", {
+      return await fetch(`${process.env.REACT_APP_URL as string}/marketplace/list-nft`, {
         method: "POST",
         body: formData,
       }).then((res) => res.json());
@@ -58,7 +59,7 @@ const NFTDetails = () => {
       const formData = new FormData();
       formData.append("isListed", "false");
       formData.append("tokenId", tokenId as string);
-      return await fetch("http://localhost:8801/marketplace/cancel-list", {
+      return await fetch(`${process.env.REACT_APP_URL as string}/marketplace/cancel-list`, {
         method: "POST",
         body: formData,
       }).then((res) => res.json());
@@ -70,7 +71,7 @@ const NFTDetails = () => {
       const formData = new FormData();
       formData.append("isListed", "false");
       formData.append("tokenId", tokenId as string);
-      return await fetch("http://localhost:8801/marketplace/buy-nft", {
+      return await fetch(`${process.env.REACT_APP_URL as string}/marketplace/buy-nft`, {
         method: "POST",
         body: formData,
       }).then((res) => res.json());
@@ -92,6 +93,9 @@ const NFTDetails = () => {
 
     await listNft(Number(combinedResponse?.nft.tokenId), listPrice);
     setIsDisabled(false);
+
+    refetch(); // refetch the data to update the UI
+
     console.log(response);
   };
 
@@ -100,6 +104,9 @@ const NFTDetails = () => {
     const response = await cancelListMutation.mutateAsync();
     await cancelListing(Number(combinedResponse?.nft.tokenId));
     setIsDisabled(false);
+
+    refetch(); // refetch the data to update the UI
+
     console.log(response);
   };
 
@@ -108,6 +115,9 @@ const NFTDetails = () => {
     const response = await buyNftMutation.mutateAsync();
     await buyNft(Number(combinedResponse?.nft.tokenId));
     setIsDisabled(false);
+
+    refetch(); // refetch the data to update the UI
+
     console.log(response);
   };
 

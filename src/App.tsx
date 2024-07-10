@@ -7,8 +7,6 @@ import Navbar from "./components/Navbar";
 import MintPage from "./pages/Form";
 import Profile from "./pages/Profile";
 import NFTDetails from "./pages/NFTDetails";
-import Seller from "./pages/Seller";
-import Buy from "./pages/Buy";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +19,6 @@ const Layout: React.FC = () => {
           <Outlet />
         </QueryClientProvider>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

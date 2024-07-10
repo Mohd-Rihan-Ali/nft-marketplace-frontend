@@ -8,9 +8,8 @@ import React, {
 import { ethers } from "ethers";
 import { MINTER_ABI } from "../ABIs/NFTMinterABI";
 
-// const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS as string;
-const CONTRACT_ADDRESS = "0x4fD96a6450047Ed0370b90b1BB1dDfCba5C93E3F";
-console.log("Contract address:", CONTRACT_ADDRESS);
+const CONTRACT_ADDRESS = process.env.REACT_APP_MINTER_CONTRACT_ADDRESS as string;
+console.log("REACT_APP_MINTER_CONTRACT_ADDRESS:", CONTRACT_ADDRESS);
 
 const contractABI = MINTER_ABI;
 

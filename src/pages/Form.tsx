@@ -32,7 +32,7 @@ const MintPage = () => {
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts", account],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:8801/nfts/${account}`);
+      const response = await axios.get(`${process.env.REACT_APP_URL as string}/nfts/${account}`);
       return response.data;
     },
     enabled: !!account,
@@ -52,7 +52,7 @@ const MintPage = () => {
         formData.append("account", account || "");
         formData.append("owner", owner || "");
       }
-      return await fetch("http://localhost:8801/mint", {
+      return await fetch(`${process.env.REACT_APP_URL as string}/mint`, {
         method: "POST",
         body: formData,
       }).then((res) => res.json());
