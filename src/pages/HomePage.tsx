@@ -18,7 +18,7 @@ export const HomePage = () => {
   const { account } = useMinter();
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
 
-  const { data: nfts } = useQuery({
+  const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts"],
     queryFn: async () => {
       const response = await axios.get(
@@ -29,27 +29,32 @@ export const HomePage = () => {
   });
 
   useEffect(() => {
-    setOwnedNFTs(nfts || []);
-  }, [nfts, account]);
+    console.log("Hello data:", nfts);
+    if (nfts) setOwnedNFTs(nfts);
+  }, [nfts]);
 
   return (
     <>
       <Banner />
       <div className={styles.home}>
         <div className={styles.nftGallery}>
-          {ownedNFTs?.map((nft) => (
-            <Link
-              to={`/nft/${nft.tokenId}`}
-              key={nft.tokenId}
-              className={styles.nftLink}
-            >
-              <div className={styles.nftItem}>
-                <img src={nft.image} alt={nft.name} />
-                <div className={styles.nftName}>{nft.name}</div>
-                <div className={styles.nftDescription}>{nft.description}</div>
-              </div>
-            </Link>
-          ))}
+          {ownedNFTs?.length > -1
+            ? ownedNFTs?.map((nft) => (
+                <Link
+                  to={`/nft/${nft.tokenId}`}
+                  key={nft.tokenId}
+                  className={styles.nftLink}
+                >
+                  <div className={styles.nftItem}>
+                    <img src={nft.image} alt={nft.name} />
+                    <div className={styles.nftName}>{nft.name}</div>
+                    <div className={styles.nftDescription}>
+                      {nft.description}
+                    </div>
+                  </div>
+                </Link>
+              ))
+            : "Loading..."}
         </div>
       </div>
     </>

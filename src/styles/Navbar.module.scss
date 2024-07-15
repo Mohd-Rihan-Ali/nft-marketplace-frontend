@@ -12,149 +12,163 @@ $transition: 0.3s ease-in-out;
   background-color: $bg-color;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
-  // margin-bottom: 2rem;
   overflow: hidden;
 
   .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
+    width: 90%;
 
-    .left,
-    .right {
-      display: flex;
-      align-items: center;
+    .logoLink {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .left {
-      .logoLink {
-        text-decoration: none;
-        color: inherit;
+    .logo {
+      font-size: 1.5rem;
+      background-color: $primary-color;
+      color: $secondary-color;
+      padding: 0.5rem 1rem;
+      border-radius: $border-radius;
+      cursor: pointer;
+      margin-right: 2rem;
+      &:hover {
+        background-color: darken($primary-color, 5%);
       }
+    }
 
-      .logo {
-        font-size: 1.5rem;
-        background-color: $primary-color;
-        color: $secondary-color;
-        padding: 0.5rem 1rem;
-        border-radius: $border-radius;
+    .menu {
+      display: flex;
+
+      .menuItem {
+        margin-right: 1rem;
+        font-size: 1rem;
         cursor: pointer;
-        margin-right: 2rem;
+        background-color: $bg-color;
+        text-decoration: none;
+        color: $font-color;
+        padding: 0.5rem;
+        border-radius: $border-radius;
         &:hover {
-          background-color: darken($primary-color, 5%);
+          color: $primary-color;
+          background-color: lighten($primary-color, 40%);
         }
       }
 
-      .menu {
-        display: flex;
-
-        .menuItem {
-          margin-right: 1rem;
-          font-size: 1rem;
-          cursor: pointer;
-          background-color: $bg-color;
-          text-decoration: none;
-          color: $font-color;
-          padding: 0.5rem;
-          border-radius: $border-radius;
-          &:hover {
-            color: $primary-color;
-            background-color: lighten($primary-color, 40%);
-          }
-        }
-      }
-    }
-
-    .right {
-      display: flex;
-      align-items: center;
-
-      .search {
+      .left,
+      .right {
         display: flex;
         align-items: center;
-        background-color: $secondary-color;
-        border: 1px solid rgba(159, 159, 159, 0.5);
-        border-radius: $border-radius;
-        padding: 0.5rem;
-        margin-right: 1rem;
+      }
 
-        .searchIcon {
-          margin-right: 0.5rem;
-        }
+      .right {
+        display: flex;
+        align-items: center;
 
-        .searchInput {
-          border: none;
-          background: none;
-          color: rgba(159, 159, 159, 1);
-          font-size: 1rem;
-          &:focus {
-            outline: none;
+        .search {
+          display: flex;
+          align-items: center;
+          background-color: $secondary-color;
+          border: 1px solid rgba(159, 159, 159, 0.5);
+          border-radius: $border-radius;
+          padding: 0.5rem;
+          margin-right: 1rem;
+
+          .searchIcon {
+            margin-right: 0.5rem;
+          }
+
+          .searchInput {
+            border: none;
+            background: none;
+            color: rgba(159, 159, 159, 1);
+            font-size: 1rem;
+            &:focus {
+              outline: none;
+            }
           }
         }
-      }
 
-      .connectWallet {
-        background-color: $primary-color;
-        color: $secondary-color;
-        padding: 0.5rem 1rem;
-        border-radius: $border-radius;
-        cursor: pointer;
-        margin-right: 1rem;
-        &:hover {
-          background-color: darken($primary-color, 5%);
+        .connectWallet {
+          background-color: $primary-color;
+          color: $secondary-color;
+          padding: 0.5rem 1rem;
+          border-radius: $border-radius;
+          cursor: pointer;
+          margin-right: 1rem;
+          &:hover {
+            background-color: darken($primary-color, 5%);
+          }
+        }
+
+        .bagIcon {
+          cursor: pointer;
         }
       }
-
-      .bagIcon {
-        cursor: pointer;
-      }
+    }
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 740px) {
   .navbar {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-  }
+    padding: 0.5rem 0;
+    overflow: hidden;
 
-  .container {
-    flex-direction: column;
-    align-items: flex-start;
+    .container {
+      flex-direction: row;
+      // align-items: flex-start;
+      gap: 1rem;
 
-    .left {
-      flex-direction: column;
-      align-items: flex-start;
+
+      .hamburger {
+        display: block;
+      }
 
       .logo {
         margin-right: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
       }
 
       .menu {
+        display: none;
         flex-direction: column;
+        width: 40%;
 
-        .menuItem {
-          margin-right: 0;
-          margin-bottom: 0.5rem;
+        .left,
+        .right {
+          width: 100%;
+          flex-direction: column;
+
+          .menuItem {
+            margin-right: 0;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+        .right {
+          .search {
+            display: none;
+          }
+
+          .connectWallet {
+            margin-right: 0;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            text-align: center;
+          }
         }
       }
-    }
 
-    .right {
-      flex-direction: column;
-      align-items: flex-start;
-
-      .search {
-        margin-right: 0;
-        margin-bottom: 0.5rem;
-      }
-
-      .connectWallet {
-        margin-right: 0;
-        margin-bottom: 0.5rem;
+      .menu.open {
+        display: flex;
       }
     }
   }

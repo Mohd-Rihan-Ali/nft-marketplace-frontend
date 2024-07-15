@@ -157,3 +157,11 @@ body {
     color: inherit;
   }
 }
+
+
+@media (max-width: 740px) {
+  .container{
+    margin: 2rem;
+  }
+  
+}

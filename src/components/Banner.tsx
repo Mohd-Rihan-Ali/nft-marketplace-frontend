@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Banner.module.scss";
 import { images } from "../assets/index";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Banner = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -13,33 +15,44 @@ const Banner = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const { data: nftStats } = useQuery({
+    queryKey: ["stats"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL as string}/stats`
+      );
+      return response.data;
+    },
+  });
+
+  const _bestOffer = nftStats?.bestOffer / 10 ** 18;
+  const _totalPrice = (nftStats?.totalPrice / 10 ** 18).toFixed(4);
+
   return (
     <div
       className={styles.banner}
       style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
     >
       <div className={styles.content}>
-        <h1 className={styles.title}>Mint Portal: Minter</h1>
-        <p className={styles.subtitle}>A marketplace for NFTs</p>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Mint Portal: Minter</h1>
+          <p className={styles.subtitle}>A marketplace for NFTs</p>
+        </div>
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <span>75 ETH</span>
+            <span>{_totalPrice} ETH</span>
             <p>Total volume</p>
           </div>
           <div className={styles.stat}>
-            <span>0.0196 ETH</span>
-            <p>Floor price</p>
-          </div>
-          <div className={styles.stat}>
-            <span>0.016 WETH</span>
+            <span>{_bestOffer} ETH</span>
             <p>Best offer</p>
           </div>
           <div className={styles.stat}>
-            <span>11%</span>
+            <span>{nftStats?.percentListed}%</span>
             <p>Listed</p>
           </div>
           <div className={styles.stat}>
-            <span>2,589 (47%)</span>
+            <span>{nftStats?.totalUsers}</span>
             <p>Owners (Unique)</p>
           </div>
         </div>
