@@ -1,0 +1,111 @@
+$primary-color: #5a67d8;
+$secondary-color: #edf2f7;
+$bg-color: #edf6fc;
+$font-color: #2d3748;
+$border-radius: 8px;
+$transition: 0.3s ease-in-out;
+
+.footer {
+  background-color: $bg-color;
+  padding: 2rem 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 30%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    text-align: center;
+
+    .logoSection {
+      margin-bottom: 1rem;
+
+      .logoLink {
+        text-decoration: none;
+        color: inherit;
+
+        .logo {
+          font-size: 1.5rem;
+          background-color: $primary-color;
+          color: $secondary-color;
+          padding: 0.5rem 1rem;
+          border-radius: $border-radius;
+          &:hover {
+            background-color: darken($primary-color, 5%);
+          }
+        }
+      }
+    }
+
+    .navLinks {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+
+      .navLink {
+        margin: 0 1rem;
+        font-size: 1rem;
+        text-decoration: none;
+        color: $font-color;
+        background-color: $bg-color;
+        padding: 0.5rem;
+        border-radius: $border-radius;
+        &:hover {
+          color: $primary-color;
+          background-color: lighten($primary-color, 40%);
+        }
+      }
+    }
+
+    .socialLinks {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+
+      .socialLink {
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+        color: $font-color;
+        transition: color $transition;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .footerInfo {
+      font-size: 0.9rem;
+      color: $font-color;
+
+      p {
+        margin: 0.2rem 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 740px) {
+  .footer {
+    padding: 1rem 0;
+
+    .container {
+      width: 100%;
+
+      .navLinks {
+        flex-direction: column;
+
+        .navLink {
+          margin: 0.5rem 0;
+        }
+      }
+
+      .socialLinks {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

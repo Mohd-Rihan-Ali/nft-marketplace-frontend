@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IoIosSearch } from "react-icons/io";
-import { PiHandbagSimpleLight } from "react-icons/pi";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useMinter } from "../utils/contexts/MinterContext";
 import { useMarketplace } from "../utils/contexts/MarketplaceContext";
@@ -31,7 +29,10 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.container}>
         <Link to="/" className={styles.logoLink}>
-          <div className={styles.logo}>Minter</div>
+          <div className={styles.logo}>
+            {/* <img src={Minter} alt="" /> */}
+            Minter
+          </div>
         </Link>
 
         <div className={`${styles.menu} ${menuOpen ? styles.open : ""}`}>
@@ -42,22 +43,24 @@ const Navbar = () => {
             <Link to="/profile" className={styles.menuItem}>
               {account ? "Profile" : "Profile"}
             </Link>
+            <Link to="/about" className={styles.menuItem}>
+              About
+            </Link>
           </div>
           <div className={styles.right}>
-            <div className={styles.search}>
+            {/* <div className={styles.search}>
               <IoIosSearch size={20} className={styles.searchIcon} />
               <input
                 type="text"
                 placeholder="Search"
                 className={styles.searchInput}
               />
-            </div>
+            </div> */}
             <div className={styles.connectWallet} onClick={handleConnectWallet}>
               {isConnected
                 ? abbreviateAddress(account as string)
                 : "Connect Wallet"}
             </div>
-            <PiHandbagSimpleLight size={25} className={styles.bagIcon} />
           </div>
         </div>
         <div className={styles.hamburger} onClick={toggleMenu}>

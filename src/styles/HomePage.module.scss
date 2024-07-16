@@ -7,6 +7,7 @@ $transition: 0.3s ease-in-out;
 
 .home {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
@@ -17,50 +18,63 @@ $transition: 0.3s ease-in-out;
   overflow: hidden;
   font-size: 1rem;
 
-  .nftGallery {
+  .container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    align-items: center;
     width: 90%;
 
-    .nftLink {
+    h3 {
+      font-size: medium;
+      align-self: flex-start;
+    }
+
+    .nftGallery {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
+      gap: 2rem;
+      width: 90%;
 
-      .nftItem {
-        background-color: white;
-        padding: 1rem;
-        border-radius: $border-radius;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 200px;
-        text-align: center;
-        transition: transform $transition;
-        height: 250px;
+      .nftLink {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
 
-        &:hover {
-          transform: translateY(-5px);
-        }
-
-        img {
-          width: 100%;
+        .nftItem {
+          background-color: white;
+          padding: 1rem;
           border-radius: $border-radius;
-          margin-bottom: 1rem;
-        }
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 200px;
+          text-align: center;
+          transition: transform $transition;
+          height: 250px;
 
-        .nftName {
-          font-size: 1.2rem;
-          color: $primary-color;
-          margin-bottom: 0.5rem;
-        }
+          &:hover {
+            transform: translateY(-5px);
+          }
 
-        .nftDescription {
-          font-size: 1rem;
-          color: $font-color;
+          img {
+            width: 100%;
+            border-radius: $border-radius;
+            margin-bottom: 1rem;
+          }
+
+          .nftName {
+            font-size: 1.2rem;
+            color: $primary-color;
+            margin-bottom: 0.5rem;
+          }
+
+          .nftDescription {
+            font-size: 1rem;
+            color: $font-color;
+          }
         }
       }
     }
@@ -69,19 +83,21 @@ $transition: 0.3s ease-in-out;
 
 @media (max-width: 560px) {
   .home {
-    .nftGallery {
-      width: 100%;
-      gap: 1rem;
-      .nftItem {
-        width: 40%;
-        gap: 0.2rem;
-        height: 20vh;
+    .container {
+      .nftGallery {
+        width: 100%;
+        gap: 1rem;
+        .nftItem {
+          width: 40%;
+          gap: 0.2rem;
+          height: 20vh;
 
-        // img {
-        //   width: 100%;
-        //   border-radius: $border-radius;
-        //   margin-bottom: 1rem;
-        // }
+          // img {
+          //   width: 100%;
+          //   border-radius: $border-radius;
+          //   margin-bottom: 1rem;
+          // }
+        }
       }
     }
   }

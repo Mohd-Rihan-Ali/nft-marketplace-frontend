@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import MintPage from "./pages/Form";
 import Profile from "./pages/Profile";
 import NFTDetails from "./pages/NFTDetails";
+import Footer from "./components/Footer";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,7 @@ const Layout: React.FC = () => {
           <Outlet />
         </QueryClientProvider>
       </div>
+      <Footer />
     </div>
   );
 };
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/mint",
         element: <MintPage />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/profile",

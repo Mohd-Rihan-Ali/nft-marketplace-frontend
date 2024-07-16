@@ -37,24 +37,27 @@ export const HomePage = () => {
     <>
       <Banner />
       <div className={styles.home}>
-        <div className={styles.nftGallery}>
-          {ownedNFTs?.length > -1
-            ? ownedNFTs?.map((nft) => (
-                <Link
-                  to={`/nft/${nft.tokenId}`}
-                  key={nft.tokenId}
-                  className={styles.nftLink}
-                >
-                  <div className={styles.nftItem}>
-                    <img src={nft.image} alt={nft.name} />
-                    <div className={styles.nftName}>{nft.name}</div>
-                    <div className={styles.nftDescription}>
-                      {nft.description}
+        <div className={styles.container}>
+          <h3>Collections</h3>
+          <div className={styles.nftGallery}>
+            {ownedNFTs?.length > -1
+              ? ownedNFTs?.map((nft) => (
+                  <Link
+                    to={`/nft/${nft.tokenId}`}
+                    key={nft.tokenId}
+                    className={styles.nftLink}
+                  >
+                    <div className={styles.nftItem}>
+                      <img src={nft.image} alt={nft.name} />
+                      <div className={styles.nftName}>{nft.name}</div>
+                      <div className={styles.nftDescription}>
+                        {nft.description}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))
-            : "Loading..."}
+                  </Link>
+                ))
+              : "Loading..."}
+          </div>
         </div>
       </div>
     </>
