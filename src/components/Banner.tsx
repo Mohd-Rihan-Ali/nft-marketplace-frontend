@@ -26,7 +26,8 @@ const Banner = () => {
   });
 
   const _bestOffer = nftStats?.bestOffer / 10 ** 18;
-  const _totalPrice = (nftStats?.totalPrice / 10 ** 18).toFixed(4);
+  const _totalPrice = (nftStats?.totalPrice / 10 ** 18).toFixed(3);
+  const _percetnListed = nftStats?.percentListed?.toFixed(2);
 
   return (
     <div
@@ -48,7 +49,7 @@ const Banner = () => {
             <p>Best offer</p>
           </div>
           <div className={styles.stat}>
-            <span>{nftStats?.percentListed}%</span>
+            <span>{_percetnListed}%</span>
             <p>Listed</p>
           </div>
           <div className={styles.stat}>

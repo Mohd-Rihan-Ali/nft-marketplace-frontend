@@ -12,6 +12,8 @@ $transition: 0.3s ease-in-out;
   background-color: $bg-color;
   color: $font-color;
   width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
 
   .hero {
     text-align: center;

@@ -12,12 +12,15 @@ interface NFT {
   image: string;
   tokenId: number;
   createdAt: Date;
+  isListed: boolean;
+  history: [];
 }
 
 const Profile = () => {
   const { account } = useMinter();
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
   const [isAccount, setIsAccount] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>("all");
 
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts", account],
@@ -34,12 +37,31 @@ const Profile = () => {
     setOwnedNFTs(nfts || []);
   }, [nfts, account]);
 
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredNFTs = ownedNFTs.filter((nft) =>
+    filter === "all" ? true : filter === "listed" ? nft.isListed : !nft.isListed
+  );
+
   return (
     <div className={styles.profile}>
-      <h2>{account ? "Your Profile" : "Connect Wallet 💭"}</h2>
+      <div className={styles.header}>
+        <h2>{account ? "Your Collections ✨" : "Connect Wallet 💭"}</h2>
+        <select
+          value={filter}
+          onChange={handleFilterChange}
+          className={styles.filterSelect}
+        >
+          <option value="all">All</option>
+          <option value="listed">Listed</option>
+          <option value="notListed">Not Listed</option>
+        </select>
+      </div>
 
       <div className={styles.nftGallery}>
-        {ownedNFTs?.map((nft) => (
+        {filteredNFTs?.map((nft) => (
           <Link
             to={`/nft/${nft.tokenId}`}
             key={nft.tokenId}
@@ -49,6 +71,16 @@ const Profile = () => {
               <img src={nft.image} alt={nft.name} />
               <div className={styles.nftName}>{nft.name}</div>
               <div className={styles.nftDescription}>{nft.description}</div>
+
+              <div className={styles.options}>
+                {nft.history[nft.history.length - 1] === account
+                  ? nft.isListed
+                    ? "Cancel Listing"
+                    : "List"
+                  : nft.isListed
+                  ? "Buy"
+                  : "Not Listed Yet"}
+              </div>
             </div>
           </Link>
         ))}

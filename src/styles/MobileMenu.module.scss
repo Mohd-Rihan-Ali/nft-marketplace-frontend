@@ -1,0 +1,83 @@
+$primary-color: #5a67d8;
+$secondary-color: #edf2f7;
+$bg-color: #edf6fc;
+$font-color: #2d3748;
+$border-radius: 8px;
+$transition: 0.3s ease-in-out;
+
+.container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  width: 30vw;
+  height: 100vh;
+  background-color: $bg-color;
+  top: 0rem;
+  right: 0;
+  box-sizing: border-box;
+  z-index: 1;
+
+  .cross {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    .menuItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem;
+      border-radius: $border-radius;
+
+      &:hover {
+        color: $primary-color;
+        background-color: lighten($primary-color, 40%);
+      }
+    }
+  }
+  .connectWallet {
+    background-color: $primary-color;
+    color: $secondary-color;
+    padding: 0.5rem 0.5rem;
+    border-radius: $border-radius;
+    cursor: pointer;
+    margin-top: 2rem;
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+  }
+  .socialLinks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rem;
+    gap: 1rem;
+    width: 100%;
+
+    .socialLink {
+      //   margin: 0 0.5rem;
+      font-size: 1.5rem;
+      color: $font-color;
+      transition: color $transition;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}

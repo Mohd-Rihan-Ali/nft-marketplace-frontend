@@ -12,11 +12,14 @@ interface NFT {
   image: string;
   tokenId: number;
   createdAt: Date;
+  isListed: boolean;
+  history: [];
 }
 
 export const HomePage = () => {
   const { account } = useMinter();
   const [ownedNFTs, setOwnedNFTs] = useState<NFT[]>([]);
+  const [filter, setFilter] = useState<string>("all");
 
   const { data: nfts } = useQuery<NFT[]>({
     queryKey: ["nfts"],
@@ -29,19 +32,37 @@ export const HomePage = () => {
   });
 
   useEffect(() => {
-    console.log("Hello data:", nfts);
     if (nfts) setOwnedNFTs(nfts);
   }, [nfts]);
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredNFTs = ownedNFTs.filter((nft) =>
+    filter === "all" ? true : filter === "listed" ? nft.isListed : !nft.isListed
+  );
 
   return (
     <>
       <Banner />
       <div className={styles.home}>
         <div className={styles.container}>
-          <h3>Collections</h3>
+          <div className={styles.header}>
+            <h3>Collections</h3>
+            <select
+              value={filter}
+              onChange={handleFilterChange}
+              className={styles.filterSelect}
+            >
+              <option value="all">All</option>
+              <option value="listed">Listed</option>
+              <option value="notListed">Not Listed</option>
+            </select>
+          </div>
           <div className={styles.nftGallery}>
-            {ownedNFTs?.length > -1
-              ? ownedNFTs?.map((nft) => (
+            {filteredNFTs.length > 0
+              ? filteredNFTs.map((nft) => (
                   <Link
                     to={`/nft/${nft.tokenId}`}
                     key={nft.tokenId}
@@ -52,6 +73,16 @@ export const HomePage = () => {
                       <div className={styles.nftName}>{nft.name}</div>
                       <div className={styles.nftDescription}>
                         {nft.description}
+                      </div>
+
+                      <div className={styles.options}>
+                        {nft.history[nft.history.length - 1] === account
+                          ? nft.isListed
+                            ? "Cancel Listing"
+                            : "List"
+                          : nft.isListed
+                          ? "Buy"
+                          : "Not Listed Yet"}
                       </div>
                     </div>
                   </Link>

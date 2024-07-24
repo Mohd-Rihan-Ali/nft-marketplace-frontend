@@ -24,6 +24,7 @@ $transition: 0.3s ease-in-out;
   }
 
   .historyTable {
+    display: block;
     border-collapse: collapse;
     overflow-y: auto; 
     overflow-x: auto;
@@ -32,7 +33,7 @@ $transition: 0.3s ease-in-out;
     th,
     td {
       border: 1px solid #e2e8f0;
-      padding: 12px 15px;
+      padding: 10px 15px;
       text-align: left;
       text-overflow: ellipsis;
       white-space: nowrap;

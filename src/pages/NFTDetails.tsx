@@ -7,6 +7,7 @@ import SetPrice from "../components/SetPrice";
 import TokenHistory from "../components/TokenHistory";
 import { useMinter } from "../utils/contexts/MinterContext";
 import { useMarketplace } from "../utils/contexts/MarketplaceContext";
+import { HomePage } from "./HomePage";
 
 interface NFT {
   name: string;
@@ -128,6 +129,7 @@ const NFTDetails = () => {
   let currentOwner =
     combinedResponse?.nft.history[combinedResponse?.nft.history.length - 1];
   let isListed = combinedResponse?.nft.isListed;
+
 
   return (
     <>

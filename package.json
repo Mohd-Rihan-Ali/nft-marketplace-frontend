@@ -39,6 +39,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "sync": "aws s3 sync --region 'ap-south-1' ./build 's3://mintportal/'",
+    "invalidate": "aws cloudfront --region 'global' create-invalidation --distribution-id 'E9X4NRJ7WNC36' --paths '/*'",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
